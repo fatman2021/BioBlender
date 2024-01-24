@@ -558,7 +558,8 @@ class Molecule(object):
 				fipdbf.write(header+coord+fi)
 		if self.verbose: sys.stdout.write('%s was writen' % fipdbfile)
 
-	def _griddimcalc(self, listcoord, spacing, gridmargin):
+	@staticmethod
+	def _griddimcalc(listcoord, spacing, gridmargin):
 		"""Determination of the grid dimension"""
 		coordmin = min(listcoord) - gridmargin
 		coordmax = max(listcoord) + gridmargin
@@ -568,24 +569,30 @@ class Molecule(object):
 		ngrid = int(round((coordmax - coordmin) / spacing))
 		return coordmin, coordmax, ngrid
 
-	def _dubost(self, fi, d, n):
+	@staticmethod
+	def _dubost(fi, d, n):
 		return (fi / (1 + d)).sum()
 
-	def _testa(self, fi, d, n):
+	@staticmethod
+	def _testa(fi, d, n):
 		return (fi * numpy.exp(-d/2)).sum()
 		
-	def _fauchere(self, fi, d, n):
+	@staticmethod
+	def _fauchere(fi, d, n):
 		return (fi * numpy.exp(-d)).sum()
 
-	def _brasseur(self, fi, d, n):
+	@staticmethod
+	def _brasseur(fi, d, n):
 		#3.1 division is there to remove any units in the equation
 		#3.1A is the average diameter of a water molecule (2.82 -> 3.2)
 		return (fi * numpy.exp(-d/3.1)).sum()
 
-	def _buckingham(self, fi, d, n):
+	@staticmethod
+	def _buckingham(fi, d, n):
 		return ( fi / (d**n)).sum()
 
-	def _type5(self, fi, d, n):
+	@staticmethod
+	def _type5(fi, d, n):
 		return (fi * numpy.exp(-numpy.sqrt(d))).sum()
 
 	def calculatefimap(self, method, spacing, nexp):
