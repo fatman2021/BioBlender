@@ -1053,9 +1053,9 @@ class Molecule(object):
 
         coordatms = numpy.zeros((len(atoms), 3), float)
         fiatms = numpy.zeros((len(atoms)), float)
-        for p in range(len(atoms)):
-            coordatms[p] = [atoms[p].x, atoms[p].y, atoms[p].z]
-            fiatms[p] = atoms[p].fi
+        for p, item in enumerate(atoms):
+            coordatms[p] = [item.x, item.y, item.z]
+            fiatms[p] = item.fi
 
         self.pot = numpy.zeros((nxgrid + 1, nygrid + 1, nzgrid + 1), float)
         gridsize = (nxgrid + 1) * (nygrid + 1) * (nzgrid + 1)
