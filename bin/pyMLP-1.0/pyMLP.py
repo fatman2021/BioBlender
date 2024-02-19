@@ -30,7 +30,7 @@ except ImportError:
     pass
 
 
-class Defaults(object):
+class Defaults:
     """Constants"""
 
     def __init__(self):
@@ -836,7 +836,7 @@ def writefitab(fidata, fitabfile, verbose=False):
         sys.stderr.write("Can't write file named : %s\n" % fitabfile)
 
 
-class Atom(object):
+class Atom:
     """Atom properties needed for the calculation"""
 
     def __init__(self, x, y, z, fi):
@@ -846,7 +846,7 @@ class Atom(object):
         self.fi = fi
 
 
-class Molecule(object):
+class Molecule:
     """Main class of pyMLP"""
 
     def __init__(self, verbose=False):
