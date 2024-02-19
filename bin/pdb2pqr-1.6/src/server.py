@@ -106,7 +106,7 @@ def logRun(options, nettime, size, ff, ip):
         ff:      The name of the ff used
         ip:      The ip address of the user
     """
-    if LOGPATH == "" or LOGPATH == None:
+    if LOGPATH in ("", None):
         return
     date = time.asctime(time.localtime())
     debump = 0
