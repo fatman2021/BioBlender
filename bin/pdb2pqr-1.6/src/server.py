@@ -306,7 +306,7 @@ def cleanTmpdir():
 #    
 #    return loads
 
-def createResults(header, input, name, time, missedligands=[]):
+def createResults(header, input, name, time, missedligands=None):
     """
         Create the results web page for CGI-based runs
 
@@ -319,6 +319,8 @@ def createResults(header, input, name, time, missedligands=[]):
             missedligands: A list of ligand names whose parameters could
                      not be assigned. Optional. (list)
     """
+    if missedligands is None:
+        missedligands = []
     newheader = string.replace(header, "\n", "<BR>")
     newheader = string.replace(newheader," ","&nbsp;")
 

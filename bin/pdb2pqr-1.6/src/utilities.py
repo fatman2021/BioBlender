@@ -67,7 +67,7 @@ def sortDictByValue(dict):
     items = [ k for v, k in items]
     return items
 
-def shortestPath(graph, start, end, path=[]):
+def shortestPath(graph, start, end, path=None):
     """
         Uses recursion to find the shortest path from one node to
         another in an unweighted graph.  Adapted from
@@ -87,6 +87,8 @@ def shortestPath(graph, start, end, path=[]):
                         Returns None if start and end are not
                         connected
     """
+    if path is None:
+        path = []
 
     path = path + [start]
     if start == end:
