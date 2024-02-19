@@ -635,11 +635,6 @@ class Molecule(object):
                         line["fi"] = fi
                     except KeyError:
                         continue
-                        if self.verbose:
-                            sys.stderr.write(
-                                "Atom Number %s is not defined in \nthe fi "
-                                "parameters (might be an H)\n" % line["atmnumber"]
-                            )
 
     def writefipdb(self, fipdbfile):
         """write a fipdb file containing the data for the pdbfile and the fi
