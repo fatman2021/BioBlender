@@ -299,9 +299,7 @@ def jacobi(a, nrot):
             for i in range(j):
                 onorm = onorm + abs(a[i][j])
 
-        if dnorm != 0:
-            if onorm/dnorm <= 1e-12: break
-            
+        if dnorm != 0 and onorm/dnorm <= 1e-12: break
         for j in range(1,4):
             for i in range(j):
                 b = a[i][j]
