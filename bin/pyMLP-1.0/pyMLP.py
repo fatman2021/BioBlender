@@ -935,13 +935,12 @@ class Molecule:
     def assignfi(self, fidata):
         """assign fi parameters to each atom in the pdbfile"""
         for line in self.data:
-            if line["resname"] in fidata:
-                if not line["fi"]:
-                    try:
-                        fi = float(fidata[line["resname"]][line["atmname"]])
-                        line["fi"] = fi
-                    except KeyError:
-                        continue
+            if line["resname"] in fidata and not line["fi"]:
+                try:
+                    fi = float(fidata[line["resname"]][line["atmname"]])
+                    line["fi"] = fi
+                except KeyError:
+                    continue
 
     def writefipdb(self, fipdbfile):
         """write a fipdb file containing the data for the pdbfile and the fi
