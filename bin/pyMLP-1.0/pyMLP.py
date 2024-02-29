@@ -741,11 +741,9 @@ def _CLIparsing():
     usage = "\n%%prog -i file.pdb\n\n%s" % __doc__
     version = "%%prog %s %s" % (__version__, __date__)
     CLparser = OptionParser(usage=usage, version=version)
-    CLparser.add_option("-i",
-                        "--inpdb",
-                        dest="pdbfile",
-                        help="PDB file (input)",
-                        metavar="file.pdb")
+    CLparser.add_option(
+        "-i", "--inpdb", dest="pdbfile", help="PDB file (input)", metavar="file.pdb"
+    )
     CLparser.add_option(
         "-f",
         "--fipdb",
@@ -806,24 +804,16 @@ def _CLIparsing():
         dest="verbose",
         help="make a lot of noise ...",
     )
-    CLparser.set_defaults(verbose=False,
-                          spacing=1.0,
-                          method="fauchere",
-                          nexp=3.0)
+    CLparser.set_defaults(verbose=False, spacing=1.0, method="fauchere", nexp=3.0)
     (params, args) = CLparser.parse_args()
 
     # Checking if the input is valid
     if args or (not params.pdbfile and not params.fipdbfile):
-        CLparser.error("This script require parameters ...\n"
-                       "see help : pyMLP.py -h")
+        CLparser.error("This script require parameters ...\n" "see help : pyMLP.py -h")
 
-    methods = [
-        "dubost", "testa", "fauchere", "brasseur", "buckingham", "type5",
-        "none"
-    ]
+    methods = ["dubost", "testa", "fauchere", "brasseur", "buckingham", "type5", "none"]
     if params.method not in methods:
-        CLparser.error("Please use a valid method ...\n"
-                       "see help : pyMLP.py -h")
+        CLparser.error("Please use a valid method ...\n" "see help : pyMLP.py -h")
     return params
 
 
@@ -906,7 +896,8 @@ class Molecule:
                     if self.verbose:
                         sys.stderr.write(
                             "%s might not respect PDB standards\nor the fi "
-                            "parameters could have been misplaced\n" % pdbfile)
+                            "parameters could have been misplaced\n" % pdbfile
+                        )
                     continue
             else:
                 continue
@@ -929,8 +920,10 @@ class Molecule:
             }
             self.data.append(pdbline)
         if self.verbose:
-            sys.stdout.write("\n%s was parsed ... %i lines were taken into "
-                             "account\n" % (pdbfile, len(self.data)))
+            sys.stdout.write(
+                "\n%s was parsed ... %i lines were taken into "
+                "account\n" % (pdbfile, len(self.data))
+            )
 
     def assignfi(self, fidata):
         """assign fi parameters to each atom in the pdbfile"""
@@ -949,8 +942,7 @@ class Molecule:
             fipdbf = file(fipdbfile, "w")
         except IOError:
             if self.verbose:
-                sys.stderr.write("I am having difficulties writing on %s" %
-                                 fipdbfile)
+                sys.stderr.write("I am having difficulties writing on %s" % fipdbfile)
         for d in self.data:
             if d["fi"]:
                 header = "%-6s%5i  %-3s%1s%3s %1s%4i%1s   " % (
@@ -1014,12 +1006,15 @@ class Molecule:
                 atoms.append(Atom(d["atmx"], d["atmy"], d["atmz"], d["fi"]))
         # grid settings in angstrom
         gridmargin = Defaults().gridmargin
-        xmingrid, xmaxgrid, nxgrid = self._griddimcalc([a.x for a in atoms],
-                                                       spacing, gridmargin)
-        ymingrid, ymaxgrid, nygrid = self._griddimcalc([a.y for a in atoms],
-                                                       spacing, gridmargin)
-        zmingrid, zmaxgrid, nzgrid = self._griddimcalc([a.z for a in atoms],
-                                                       spacing, gridmargin)
+        xmingrid, xmaxgrid, nxgrid = self._griddimcalc(
+            [a.x for a in atoms], spacing, gridmargin
+        )
+        ymingrid, ymaxgrid, nygrid = self._griddimcalc(
+            [a.y for a in atoms], spacing, gridmargin
+        )
+        zmingrid, zmaxgrid, nzgrid = self._griddimcalc(
+            [a.z for a in atoms], spacing, gridmargin
+        )
         self.spacing = spacing
         self.griddim = (nxgrid + 1, nygrid + 1, nzgrid + 1)
         self.gridcoord = [
@@ -1028,21 +1023,24 @@ class Molecule:
             [zmingrid, zmaxgrid],
         ]
         if self.verbose:
-            sys.stdout.write("\nGrid dimension (angstroms):\n"
-                             "coord : min       max       ngrid\n"
-                             "    x : %8.4f %8.4f %8i\n"
-                             "    y : %8.4f %8.4f %8i\n"
-                             "    z : %8.4f %8.4f %8i\n\n" % (
-                                 xmingrid,
-                                 xmaxgrid,
-                                 nxgrid,
-                                 ymingrid,
-                                 ymaxgrid,
-                                 nygrid,
-                                 zmingrid,
-                                 zmaxgrid,
-                                 nzgrid,
-                             ))
+            sys.stdout.write(
+                "\nGrid dimension (angstroms):\n"
+                "coord : min       max       ngrid\n"
+                "    x : %8.4f %8.4f %8i\n"
+                "    y : %8.4f %8.4f %8i\n"
+                "    z : %8.4f %8.4f %8i\n\n"
+                % (
+                    xmingrid,
+                    xmaxgrid,
+                    nxgrid,
+                    ymingrid,
+                    ymaxgrid,
+                    nygrid,
+                    zmingrid,
+                    zmaxgrid,
+                    nzgrid,
+                )
+            )
 
         coordatms = numpy.zeros((len(atoms), 3), float)
         fiatms = numpy.zeros((len(atoms)), float)
@@ -1053,8 +1051,7 @@ class Molecule:
         self.pot = numpy.zeros((nxgrid + 1, nygrid + 1, nzgrid + 1), float)
         gridsize = (nxgrid + 1) * (nygrid + 1) * (nzgrid + 1)
 
-        coordgridpts = numpy.zeros((nxgrid + 1, nygrid + 1, nzgrid + 1, 3),
-                                   float)
+        coordgridpts = numpy.zeros((nxgrid + 1, nygrid + 1, nzgrid + 1, 3), float)
         for i in range(nxgrid + 1):
             for j in range(nygrid + 1):
                 for k in range(nzgrid + 1):
@@ -1086,27 +1083,35 @@ class Molecule:
             for j in range(nygrid + 1):
                 for k in range(nzgrid + 1):
                     # Evaluation of the distance between th grid point and each atoms
-                    dist = numpy.sqrt(((coordgridpts[
-                        i,
-                        j,
-                        k,
-                    ] - coordatms[
-                        :,
-                    ])**2).sum(1))
+                    dist = numpy.sqrt(
+                        (
+                            (
+                                coordgridpts[
+                                    i,
+                                    j,
+                                    k,
+                                ]
+                                - coordatms[:,]
+                            )
+                            ** 2
+                        ).sum(1)
+                    )
 
                     self.pot[i, j, k] = computemethod(fiatms, dist, nexp)
 
                 counter += 1.0
                 if self.verbose:
-                    sys.stdout.write("\rCalculation in progress :"
-                                     " %8.2f%%" % (counter * 100 /
-                                                   ((nxgrid + 1) *
-                                                    (nygrid + 1))))
+                    sys.stdout.write(
+                        "\rCalculation in progress :"
+                        " %8.2f%%" % (counter * 100 / ((nxgrid + 1) * (nygrid + 1)))
+                    )
 
         if self.verbose:
-            sys.stdout.write("\n\nMLPmin = %8.3f | MLPmax = %8.3f | "
-                             "MLPmean = %8.3f\n\n" %
-                             (self.pot.min(), self.pot.max(), self.pot.mean()))
+            sys.stdout.write(
+                "\n\nMLPmin = %8.3f | MLPmax = %8.3f | "
+                "MLPmean = %8.3f\n\n"
+                % (self.pot.min(), self.pot.max(), self.pot.mean())
+            )
 
     def writedxfile(self, dxfile):
         """Write a dx (openDX) file"""
@@ -1115,45 +1120,57 @@ class Molecule:
             return
         try:
             dxf = file(dxfile, "w")
-            dxf.write("#pyMLP output file\n"
-                      "#  \n"
-                      "#A computer once beat me at chess, \n"
-                      "#but it was no match for me at kick boxing.\n"
-                      "#  \n")
-            dxf.write("object 1 class gridpositions counts "
-                      "%i %i %i\n" % self.griddim)
+            dxf.write(
+                "#pyMLP output file\n"
+                "#  \n"
+                "#A computer once beat me at chess, \n"
+                "#but it was no match for me at kick boxing.\n"
+                "#  \n"
+            )
+            dxf.write(
+                "object 1 class gridpositions counts " "%i %i %i\n" % self.griddim
+            )
             gridmin = tuple([xyzmin[0] for xyzmin in self.gridcoord])
             dxf.write("origin %8.6e %8.6e %8.6e\n" % gridmin)
             dxf.write("delta %8.6e %8.6e %8.6e\n" % (self.spacing, 0.0, 0.0))
             dxf.write("delta %8.6e %8.6e %8.6e\n" % (0.0, self.spacing, 0.0))
             dxf.write("delta %8.6e %8.6e %8.6e\n" % (0.0, 0.0, self.spacing))
-            dxf.write("object 2 class gridconnections counts "
-                      "%i %i %i\n" % self.griddim)
+            dxf.write(
+                "object 2 class gridconnections counts " "%i %i %i\n" % self.griddim
+            )
             nbtot = self.griddim[0] * self.griddim[1] * self.griddim[2]
-            dxf.write("object 3 class array type double rank 0 items"
-                      " %i data follows\n" % nbtot)
+            dxf.write(
+                "object 3 class array type double rank 0 items"
+                " %i data follows\n" % nbtot
+            )
 
             self.pot = self.pot.reshape(nbtot)
             for m in range(0, nbtot - nbtot % 3, 3):
-                val = tuple(self.pot[m:m + 3])
+                val = tuple(self.pot[m : m + 3])
                 dxf.write("%8.6e %8.6e %8.6e\n" % val)
             if 0 < nbtot % 3 < 3:
-                for m in self.pot[nbtot - nbtot % 3:nbtot]:
+                for m in self.pot[nbtot - nbtot % 3 : nbtot]:
                     dxf.write("%8.6e " % m)
                 dxf.write("\n")
 
-            dxf.write('attribute "dep" string "positions"\n'
-                      'object "regular positions regular connections" '
-                      "class field\n"
-                      'component "positions" value 1\n'
-                      'component "connections" value 2\n'
-                      'component "data" value 3\n')
+            dxf.write(
+                'attribute "dep" string "positions"\n'
+                'object "regular positions regular connections" '
+                "class field\n"
+                'component "positions" value 1\n'
+                'component "connections" value 2\n'
+                'component "data" value 3\n'
+            )
         except IOError:
-            sys.stderr.write("\nI tried to prevent it ... but writing the .dx"
-                             "file was not possible !")
+            sys.stderr.write(
+                "\nI tried to prevent it ... but writing the .dx"
+                "file was not possible !"
+            )
         if self.verbose:
-            sys.stdout.write("\nMolecular Lipophilic Potential Map "
-                             "saved in %s\n\nBye ...\n\n" % dxfile)
+            sys.stdout.write(
+                "\nMolecular Lipophilic Potential Map "
+                "saved in %s\n\nBye ...\n\n" % dxfile
+            )
 
 
 def main():
@@ -1169,14 +1186,16 @@ def main():
             fitabf = imp.load_source("fitabf", p.fitabfile)
             fidata = fitabf.fidata
             if p.verbose:
-                sys.stdout.write("%s is compiled for internal use "
-                                 "as %sc\n" % (p.fitabfile, p.fitabfile))
+                sys.stdout.write(
+                    "%s is compiled for internal use "
+                    "as %sc\n" % (p.fitabfile, p.fitabfile)
+                )
         except IOError:  # export fidata if requested
             if p.verbose:
                 sys.stderr.write(
                     "Can't open %s ... "
-                    "using default values and creating a template\n" %
-                    p.fitabfile)
+                    "using default values and creating a template\n" % p.fitabfile
+                )
             writefitab(fidata, p.fitabfile, verbose=p.verbose)
 
     molec = Molecule(verbose=p.verbose)
@@ -1187,9 +1206,10 @@ def main():
             if p.fipdbfile:
                 if os.path.isfile(p.fipdbfile):
                     if p.verbose:
-                        sys.stderr.write("%s already exists "
-                                         "pyMLP will not overwrite it\n" %
-                                         p.fipdbfile)
+                        sys.stderr.write(
+                            "%s already exists "
+                            "pyMLP will not overwrite it\n" % p.fipdbfile
+                        )
                     pass
                 else:
                     molec.writefipdb(p.fipdbfile)
@@ -1218,8 +1238,9 @@ def main():
             bckpdxfile = p.dxfile + ".bckp_" + timestamp
             shutil.copy(p.dxfile, bckpdxfile)
             if p.verbose:
-                sys.stdout.write("Old %s was backed up as %s\n" %
-                                 (p.dxfile, bckpdxfile))
+                sys.stdout.write(
+                    "Old %s was backed up as %s\n" % (p.dxfile, bckpdxfile)
+                )
         molec.writedxfile(p.dxfile)
     else:
         if p.verbose:
