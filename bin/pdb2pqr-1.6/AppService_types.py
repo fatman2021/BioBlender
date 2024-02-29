@@ -9,10 +9,8 @@
 import ZSI
 import ZSI.TCcompound
 from ZSI.schema import (
-    GED,
     GTD,
     ElementDeclaration,
-    LocalElementDeclaration,
     TypeDefinition,
 )
 
