@@ -185,8 +185,6 @@ def cleanTmpdir():
             newcount += 1
 
 
-
-
 # def printAcceptance(name):
 #    """
 #        Print the first message to stdout (web browser) - set the
@@ -237,7 +235,6 @@ def cleanTmpdir():
 #    print "\">"
 #    print "</head>"
 #    print "</html>"
-
 
 
 def createResults(header, input, name, time, missedligands=None):
@@ -376,5 +373,3 @@ def createError(name, details):
     )
     file.write("</body>\n")
     file.write("</html>\n")
-
-
