@@ -22,7 +22,6 @@ from src.routines import *
 
 # NOTE: You should try different angle cutoffs and see how they affect your results
 ANGLE_CUTOFF = 30.0       # A - D - H(D) angle
-#ANGLE_CUTOFF = 20.0       # A - D - H(D) angle
 
 # NOTE: This hbond extension uses a different distance definition (not the H(D) - A distance).  You should still try different values for this distance cutoff and see how it affects your results.
 DIST_CUTOFF = 3.4         # D to A distance

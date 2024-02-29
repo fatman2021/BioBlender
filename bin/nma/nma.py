@@ -26,8 +26,6 @@ def computeNormalMode(userfilenamein="",userfilenameout="NMA.pdb", usermode=0,us
 	# If norm is True, extended modes are normalized.
 	# return extended, atommap
 	bb_anm, bb_atoms = extendModel(anm, mystruct_ca, mystruct.select(conf))
-	#print("type: " + str(type(bb_atoms)))
-	#print("bb_atoms stringato: " + str(bb_atoms))
 
 
 	# traverseMode(mode, atoms, n_steps=10, rmsd=1.5)[source]
@@ -37,12 +35,7 @@ def computeNormalMode(userfilenamein="",userfilenameout="NMA.pdb", usermode=0,us
 	# atoms (Atomic) - atoms whose active coordinate set will be used as the initial conformation
 	ensemble = traverseMode(bb_anm[usermode], bb_atoms, n_steps=usernbconf, rmsd=userrmsd)
 
-	#nmastruct = mystruct.copy(bb_atoms)
 	nmastruct = mystruct.copy()
-	#print("type: " + str(type(nmastruct)))
-	#print("stringato: " + str(nmastruct))
-	#print("dir: " + str(dir(nmastruct)))
-	#print("Primo elencato: " + str(nmastruct[0]))
 	
 	nmastruct.delCoordset(0)
 	nmastruct.addCoordset(ensemble)

@@ -185,62 +185,7 @@ def cleanTmpdir():
             newcount += 1
 
 
-# def getQuote(path):
-#    """
-#        Get a quote to display for the refresh page.
-#        Uses fortune to generate a quote.
-#
-#        Parameters:
-#            path:   The path to the fortune script (str)
-#        Returns:
-#            quote:   The quote to display (str)
-#    """
-#    fortune = os.popen(path)
-#    quote = fortune.read()
-#    quote = string.replace(quote, "\n", "<BR>")
-#    quote = string.replace(quote, "\t", "&nbsp;"*5)
-#    quote = "%s<P>" % quote
-#    return quote
 
-# def printProgress(name, refreshname, reftime, starttime):
-#    """
-#        Print the progress of the server
-#
-#        Parameters
-#            name:        The ID of the HTML page to write to (string)
-#            refreshname: The name of the HTML page to refresh to (string)
-#            reftime:     The length of time to set the refresh wait to (int)
-#            starttime:   The time as returned by time.time() that the run started (float)
-#    """
-#    elapsedtime = time.time() - starttime + REFRESHTIME/2.0 # Add in time offset
-#    filename = "%s%s%s-tmp.html" % (SRCPATH, TMPDIR, name)
-#    file = open(filename,"w")
-#    file.write("<HTML>\n")
-#    file.write("<HEAD>\n")
-#    file.write("<TITLE>PDB2PQR Progress</TITLE>\n")
-#    file.write("<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\">\n" % STYLESHEET)
-#    file.write("<meta http-equiv=\"Refresh\" content=\"%s; url=%s\">\n" % \
-#               (reftime, refreshname))
-#    file.write("</HEAD>\n")
-#    file.write("<BODY>\n")
-#    file.write("<H2>PDB2PQR Progress</H2><P>\n")
-#    file.write("The PDB2PQR server is generating your results - this page will automatically \n")
-#    file.write("refresh every %s seconds.<P>\n" % REFRESHTIME)
-#    file.write("Thank you for your patience!<P>\n")
-#    file.write("Server Progress:<P>\n")
-#    file.write("<blockquote>\n")
-#    file.write("<font size=2>Elapsed Time:</font> <code>%.2f seconds</code><BR>\n" % elapsedtime)
-#    file.write("</blockquote>\n")
-#    file.write("Server Information:<P>\n")
-#    file.write("<blockquote>\n")
-#    loads = getLoads()
-#    if loads != None:
-#        file.write("<font size=2>Server load:</font> <code>%s (1min)  %s (5min)  %s (15min)</code><BR>\n" % (loads[0], loads[1], loads[2]))
-#
-#    file.write("<font size=2>Server time:</font> <code>%s</code><BR>\n" % (time.asctime(time.localtime())))
-#    file.write("</blockquote>\n")
-#    file.write("</BODY></HTML>")
-#    file.close()
 
 # def printAcceptance(name):
 #    """
@@ -293,26 +238,6 @@ def cleanTmpdir():
 #    print "</head>"
 #    print "</html>"
 
-# def getLoads():
-#    """
-#        Get the system load information for output and logging
-#
-#        Returns
-#            loads:  A three entry list containing the 1, 5, and
-#                    15 minute loads. If the load file is not found,
-#                    return None.
-#    """
-#    if LOADPATH == "": return None
-#    try:
-#        file = open(LOADPATH, 'rU')
-#    except IOError:
-#        return None
-#
-#    line = file.readline()
-#    words = string.split(line)
-#    loads = words[:3]
-#
-#    return loads
 
 
 def createResults(header, input, name, time, missedligands=None):
@@ -453,71 +378,3 @@ def createError(name, details):
     file.write("</html>\n")
 
 
-# def startServer(name):
-#    """
-#        Start the PDB2PQR server.  This function is necessary so
-#        that useful information can be displayed to the user - otherwise
-#        nothing would be returned until the complete run finishes.
-#
-#        Parameters
-#            name:    The ID name of the final file to create (string)
-#        Returns
-#            pqrpath: The complete path to the pqr file (string)
-#    """
-#    cleanTmpdir()
-#    path = SRCPATH
-#    tmpdir = TMPDIR
-#
-#    starttime = time.time()
-#    pid = os.fork()
-#    if pid: #Parent - Create refreshed HTML pages and exit
-#        pid2 = os.fork()
-#        if pid2: # print to browser and exit
-#            #printAcceptance(name)
-#            printRedirector(name,False) # prints initial page, it should redirect to querystatus.cgi - just a blank page with immediate redirect, False is for signifying it's not opal, which is passed on by cgi
-#            sys.exit()
-#        else: # Thread in charge of refreshing pages
-#            home = os.getcwd()
-#            os.chdir("/")
-#            os.setsid()
-#            os.umask(0)
-#            os.chdir(home)
-#            os.close(1)
-#            os.close(2)
-#            #endname = "%s%s%s.html" % (SRCPATH, TMPDIR, name)
-#            filename = "%s%s%s" % (SRCPATH, TMPDIR, name)
-#            #tmpname = "%s%s%s-tmp.html" % (SRCPATH, TMPDIR, name)
-#            while 1:
-#                if os.path.isfile(endname): # when createResults makes endname, exit loop
-#                    #refreshname = "%s%s%s.html" % (WEBSITE, TMPDIR, name)
-#                    #reftime = 5 # reduces refresh time, since calculation is done
-#                    #printProgress(name, refreshname, reftime, starttime)
-#                    file = open(filename, 'w')
-#                    file.write('done')
-#                    file.close()
-#                    break
-#                else: # until then, keep writing to refresh page with new load and time
-#                    #refreshname = "%s%s%s-tmp.html" % (WEBSITE, TMPDIR, name)
-#                    #reftime = REFRESHTIME
-#                    #printProgress(name, refreshname, reftime, starttime)
-#                    file = open(filename, 'w')
-#                    file.write('done')
-#                    file.close()
-#                time.sleep(REFRESHTIME)
-#
-#            time.sleep(REFRESHTIME)
-#            #os.remove(tmpname)
-#            os.remove(filename)
-#            sys.exit()
-#
-#    else: # Child - run PDB2PQR
-#        # don't know what this does, or if there's even anything going on here, like running pdb2pqr
-#        home = os.getcwd()
-#        os.chdir("/")
-#        os.setsid()
-#        os.umask(0)
-#        os.chdir(home)
-#        os.close(1)
-#        os.close(2)
-#        pqrpath = "%s%s%s.pqr" % (path, tmpdir, name)
-#        return pqrpath
