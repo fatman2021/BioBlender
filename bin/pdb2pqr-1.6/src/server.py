@@ -54,14 +54,12 @@ __author__ = "Todd Dolinsky, Samir Unni, Yong Huang"
 
 # GLOBAL SERVER VARIABLES
 """ The absolute path to root HTML directory """
-SRCPATH = SRCPATH
 """ The relative path to results directory from script directory.
     The web server (i.e. Apache) MUST be able to write to this directory. """
 TMPDIR = "tmp/"
 """ The maximum size of temp directory (in MB) before it is cleaned """
 LIMIT = 500.0
 """ The path to the web site *directory* """
-WEBSITE = WEBSITE
 """ The name of the main server page """
 WEBNAME = "index.html"
 """ The stylesheet to use """
