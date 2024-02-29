@@ -101,11 +101,7 @@ def shortestPath(graph, start, end, path=None):
     for node in graph[start]:
         if node not in path:
             newpath = shortestPath(graph, node, end, path)
-            if (
-                newpath
-                and not shortest
-                or len(newpath) < len(shortest)
-            ):
+            if newpath and not shortest or len(newpath) < len(shortest):
                 shortest = newpath
     return shortest
 
