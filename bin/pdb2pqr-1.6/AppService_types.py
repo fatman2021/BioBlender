@@ -54,7 +54,6 @@ class ns0:
                     self._tag = None
                     self._default = None
                     self._textDesc = None
-                    return
             Holder.__name__ = "FlagsType_Holder"
             self.pyclass = Holder
 
@@ -81,7 +80,6 @@ class ns0:
                     self._value = []
                     self._semanticType = None
                     self._textDesc = None
-                    return
             Holder.__name__ = "ParamsType_Holder"
             self.pyclass = Holder
 
@@ -105,7 +103,6 @@ class ns0:
                     self._exclusive = None
                     self._semanticType = None
                     self._textDesc = None
-                    return
             Holder.__name__ = "GroupsType_Holder"
             self.pyclass = Holder
 
@@ -132,7 +129,6 @@ class ns0:
                     self._textDesc = None
                     self._min = None
                     self._max = None
-                    return
             Holder.__name__ = "ImplicitParamsType_Holder"
             self.pyclass = Holder
 
@@ -151,7 +147,6 @@ class ns0:
                 def __init__(self):
                     # pyclass
                     self._flag = []
-                    return
             Holder.__name__ = "FlagsArrayType_Holder"
             self.pyclass = Holder
 
@@ -171,7 +166,6 @@ class ns0:
                     # pyclass
                     self._separator = None
                     self._param = []
-                    return
             Holder.__name__ = "ParamsArrayType_Holder"
             self.pyclass = Holder
 
@@ -190,7 +184,6 @@ class ns0:
                 def __init__(self):
                     # pyclass
                     self._group = []
-                    return
             Holder.__name__ = "GroupsArrayType_Holder"
             self.pyclass = Holder
 
@@ -209,7 +202,6 @@ class ns0:
                 def __init__(self):
                     # pyclass
                     self._param = []
-                    return
             Holder.__name__ = "ImplicitParamsArrayType_Holder"
             self.pyclass = Holder
 
@@ -232,7 +224,6 @@ class ns0:
                     self._untaggedParams = None
                     self._implicitParams = None
                     self._groups = None
-                    return
             Holder.__name__ = "ArgumentsType_Holder"
             self.pyclass = Holder
 
@@ -274,7 +265,6 @@ class ns0:
                     self._usage = None
                     self._info = []
                     self._types = None
-                    return
             Holder.__name__ = "AppMetadataType_Holder"
             self.pyclass = Holder
 
@@ -314,7 +304,6 @@ class ns0:
                     self._binaryLocation = None
                     self._defaultArgs = None
                     self._parallel = None
-                    return
             Holder.__name__ = "AppConfigType_Holder"
             self.pyclass = Holder
 
@@ -334,7 +323,6 @@ class ns0:
                     # pyclass
                     self._name = None
                     self._contents = None
-                    return
             Holder.__name__ = "InputFileType_Holder"
             self.pyclass = Holder
 
@@ -355,7 +343,6 @@ class ns0:
                     self._argList = None
                     self._numProcs = None
                     self._inputFile = []
-                    return
             Holder.__name__ = "JobInputType_Holder"
             self.pyclass = Holder
 
@@ -376,7 +363,6 @@ class ns0:
                     self._code = None
                     self._message = None
                     self._baseURL = None
-                    return
             Holder.__name__ = "StatusOutputType_Holder"
             self.pyclass = Holder
 
@@ -396,7 +382,6 @@ class ns0:
                     # pyclass
                     self._jobID = None
                     self._status = None
-                    return
             Holder.__name__ = "JobSubOutputType_Holder"
             self.pyclass = Holder
 
@@ -416,7 +401,6 @@ class ns0:
                     # pyclass
                     self._jobID = None
                     self._fileName = None
-                    return
             Holder.__name__ = "OutputsByNameInputType_Holder"
             self.pyclass = Holder
 
@@ -436,7 +420,6 @@ class ns0:
                     # pyclass
                     self._name = None
                     self._url = None
-                    return
             Holder.__name__ = "OutputFileType_Holder"
             self.pyclass = Holder
 
@@ -457,7 +440,6 @@ class ns0:
                     self._stdOut = None
                     self._stdErr = None
                     self._outputFile = []
-                    return
             Holder.__name__ = "JobOutputType_Holder"
             self.pyclass = Holder
 
@@ -477,7 +459,6 @@ class ns0:
                     # pyclass
                     self._status = None
                     self._jobOut = None
-                    return
             Holder.__name__ = "BlockingOutputType_Holder"
             self.pyclass = Holder
 
@@ -496,7 +477,6 @@ class ns0:
                 def __init__(self):
                     # pyclass
                     self._message = None
-                    return
             Holder.__name__ = "FaultType_Holder"
             self.pyclass = Holder
 
