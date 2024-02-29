@@ -8,11 +8,7 @@
 
 import ZSI
 import ZSI.TCcompound
-from ZSI.schema import (
-    GTD,
-    ElementDeclaration,
-    TypeDefinition,
-)
+from ZSI.schema import GTD, ElementDeclaration, TypeDefinition
 
 ##############################
 # targetNamespace
