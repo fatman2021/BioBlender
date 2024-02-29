@@ -1,22 +1,10 @@
 import bpy
 from bpy import *
-from urllib.parse import urlencode
 from urllib.request import *
 from html.parser import *
 from smtplib import *
-from email.mime.text import MIMEText
-import time, platform, os
-import codecs
-import bpy.path
-from bpy.path import abspath
-import base64
-import mathutils
 from mathutils import *
 from math import *
-import pickle
-import shutil
-import subprocess
-import sys
 
 
 

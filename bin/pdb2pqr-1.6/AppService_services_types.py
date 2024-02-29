@@ -7,7 +7,6 @@
 
 
 import ZSI
-from ZSI.TCcompound import Struct
 
 ############################## 
 # targetNamespace 

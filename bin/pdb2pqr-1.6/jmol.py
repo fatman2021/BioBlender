@@ -7,8 +7,8 @@ __date__ = "5 July 2007"
 __author__ = "Samir Unni"
 __version__ = "0.0.1"
 
-import string, sys, os, pickle, cgi, cgitb, locale, shutil
-from sys import stdout, stderr, stdin
+import sys, cgi, cgitb, shutil
+from sys import stdout
 from src.aconf import *
 
 def jmolGen():

@@ -44,7 +44,6 @@
 
 import math
 import os
-import string
 import sys
 
 __date__ = "6 November 2007"
