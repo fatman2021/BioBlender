@@ -255,8 +255,6 @@ def getPDBFile(path):
     Returns
         file:  File object containing PDB file (file object)
     """
-
-    import os
     import urllib
 
     file = None
