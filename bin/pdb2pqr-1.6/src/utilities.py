@@ -168,7 +168,13 @@ def getFFfile(name):
     if name in ["amber", "charmm", "parse", "tyl06", "peoepb", "swanson"]:
         name = name.upper()
 
-    names = ["dat/%s.DAT" % name, "%s.DAT" % name, "%s.dat" % name, "dat/%s" % name, name]
+    names = [
+        "dat/%s.DAT" % name,
+        "%s.DAT" % name,
+        "%s.dat" % name,
+        "dat/%s" % name,
+        name,
+    ]
 
     for guess in names:
         if os.path.isfile(guess):
