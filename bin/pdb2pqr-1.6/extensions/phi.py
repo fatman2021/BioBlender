@@ -41,7 +41,7 @@ def phi(routines, outroot):
 
     for residue in protein.getResidues():
         try:
-            if residue.peptideC != None:
+            if residue.peptideC is not None:
                 pepcoords = residue.peptideC.getCoords()
             else: continue
         except AttributeError: # Non amino acids

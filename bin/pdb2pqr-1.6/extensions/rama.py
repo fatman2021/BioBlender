@@ -50,11 +50,11 @@ def rama(routines, outroot):
         else: continue
 
         try:
-            if residue.peptideN != None:
+            if residue.peptideN is not None:
                 pepncoords = residue.peptideN.getCoords()
             else: continue
 
-            if residue.peptideC != None:
+            if residue.peptideC is not None:
                 pepccoords = residue.peptideC.getCoords()
             else: continue
         except AttributeError: # Non amino acids

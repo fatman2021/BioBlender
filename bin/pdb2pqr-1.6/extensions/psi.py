@@ -50,7 +50,7 @@ def psi(routines, outroot):
         else: continue
 
         try:
-            if residue.peptideN != None:
+            if residue.peptideN is not None:
                 pepcoords = residue.peptideN.getCoords()
             else: continue
         except AttributeError: # Non amino acids
