@@ -168,12 +168,7 @@ def getFFfile(name):
     if name in ["amber", "charmm", "parse", "tyl06", "peoepb", "swanson"]:
         name = name.upper()
 
-    names = ["dat/%s.DAT" % name]
-
-    names.append("%s.DAT" % name)
-    names.append("%s.dat" % name)
-    names.append("dat/%s" % name)
-    names.append(name)
+    names = ["dat/%s.DAT" % name, "%s.DAT" % name, "%s.dat" % name, "dat/%s" % name, name]
 
     for guess in names:
         if os.path.isfile(guess):
@@ -203,8 +198,7 @@ def getNamesFile(name):
     if name in ["amber", "charmm", "parse", "tyl06", "peoepb", "swanson"]:
         name = name.upper()
 
-    names = ["dat/%s.names" % name]
-    names.append("%s.names" % name)
+    names = ["dat/%s.names" % name, "%s.names" % name]
 
     for guess in names:
         if os.path.isfile(guess):
