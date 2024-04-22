@@ -149,8 +149,7 @@ def getAngle(coords1, coords2, coords3):
     norm1 = normalize(c1)
     norm2 = normalize(c2)
     dotted = dot(norm1, norm2)
-    if dotted > 1.0:  # If normalized, this is due to rounding error
-        dotted = 1.0
+    dotted = min(dotted, 1.0)
     rad = abs(math.acos(dotted))
     angle = rad * 180.0 / math.pi
     if angle > 180.0:
